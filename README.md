@@ -17,17 +17,17 @@ In Settings file.
     local zAPI = require(game.ReplicatedStorage:WaitForChild("RZones-RS").API)
 ```
 
-#### API.getSettings()
+#### zAPI.getSettings()
 - **Description**: Retrieves the settings module required from zFolder.
 - **Parameters**: None
 - **Returns**: A table containing the settings configuration.
 
 ```lua
-    local settings = API.getSettings()
+    local settings = zAPI.getSettings()
     print(settings) -- returns the settings table
 ```
 
-#### API.getCurrentZone(identifier)
+#### zAPI.getCurrentZone(identifier)
 
 - **Description**: Retrieves the current zone that the player is in based on their identifier.
 - **Parameters**: 
@@ -35,11 +35,11 @@ In Settings file.
 - **Returns**: The name of the current zone the player is in, or false if the player is not found.
 
 ```lua
-    local currentZone = API.getCurrentZone("Player1")
+    local currentZone = zAPI.getCurrentZone("Player1")
     print(currentZone) -- returns the name of the current zone or false if not found
 ```
 
-#### API.getCurrentZoneChanged(identifier, callback)
+#### zAPI.getCurrentZoneChanged(identifier, callback)
 - **Description**: Sets up a listener for changes to the player's current zone, executing a callback when it changes.
 - **Parameters**: 
     - `identifier` _(string or number or player)_: The identifier used to find the player. Use player name or id or player.
@@ -47,14 +47,14 @@ In Settings file.
 - **Returns**: A connection object that can be used to disconnect the listener, or false if the player is not found.
 
 ```lua
-    local connection = API.getCurrentZoneChanged("Player1", function(newZone)
+    local connection = zAPI.getCurrentZoneChanged("Player1", function(newZone)
         print("Player1 has moved to:", newZone)
     end)
     -- To disconnect:
     connection:Disconnect()
 ```
 
-#### API.getAttributes(zoneName, filterPrefix)
+#### zAPI.getAttributes(zoneName, filterPrefix)
 - **Description**: Retrieves the attributes of a specified zone, optionally filtering them by a prefix.
 - **Parameters**: 
     - `zoneName` _(string)_: The name of the zone to retrieve attributes from. 
@@ -62,11 +62,11 @@ In Settings file.
 - **Returns**: A table containing the attributes of the zone, optionally filtered by the prefix, or false if the zone is not found.
 
 ```lua
-    local attributes = API.getAttributes("Zone1", "filterPrefix")
+    local attributes = zAPI.getAttributes("Zone1", "filterPrefix")
     print(attributes) -- returns a table of attributes with the prefix, or all attributes if no prefix is provided
 ```
 
-#### API.getAttribute(zoneName, prefix, attributeName)
+#### zAPI.getAttribute(zoneName, prefix, attributeName)
 - **Description**: Retrieves a specific attribute from a zone based on a prefix and attribute name.
 - **Parameters**: 
     - `zoneName` _(string)_: The name of the zone to retrieve the attribute from. 
@@ -75,11 +75,11 @@ In Settings file.
 - **Returns**: The value of the attribute, or false if the zone or attribute is not found.
 
 ```lua
-    local attributeValue = API.getAttribute("Zone1", "prefix", "attributeName")
+    local attributeValue = zAPI.getAttribute("Zone1", "prefix", "attributeName")
     print(attributeValue) -- returns the attribute value or false if not found
 ```
 
-#### API.setAttribute(zoneName, prefix, attributeName, value)
+#### zAPI.setAttribute(zoneName, prefix, attributeName, value)
 - **Description**: Sets the value of a specific attribute in a zone, ensuring the prefix is properly formatted.
 - **Parameters**:
     - `zoneName` _(string)_: The name of the zone to set the attribute for.
@@ -89,6 +89,6 @@ In Settings file.
 - **Returns**: true if the attribute was successfully set, or false if the zone was not found.
 
 ```lua
-    local success = API.setAttribute("Zone1", "prefix", "attributeName", "newValue")
+    local success = zAPI.setAttribute("Zone1", "prefix", "attributeName", "newValue")
     print(success) -- returns true if the attribute was set, or false if the zone was not found
 ```
