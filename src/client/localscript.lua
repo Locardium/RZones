@@ -38,10 +38,14 @@ if Settings.topBarInfo then
 	zoneId:setName("zoneId")
 	zoneId:setLabel("Lobby")
 	zoneId:disableStateOverlay(true)
-	zoneId:lock(true)
 
 	if Settings.chatByZone then
 		zoneId:setCaption("The chat only works with people who are in this area")
+		zoneId.selected:Connect(function(fromSource)
+			zoneId:deselect()
+		end)
+	else
+		zoneId:lock(true)
 	end
 
 	zAPI.getCurrentZoneChanged(Players.LocalPlayer, function(value)

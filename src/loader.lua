@@ -18,20 +18,21 @@ local folderId = generateId()
 mainFolder:SetAttribute("id", folderId)
 
 --Chat system
-local chatSystem = script.Parent.Client.ChatSystem
+local Chat = game:GetService("Chat")
+local chatSystemNew = script.Parent.Client.ChatSystemNew
+local chatSystemOld = script.Parent.Client.ChatSystemOld
 
-if Settings.chatByZone and game.TextChatService.ChatVersion ~= Enum.ChatVersion.LegacyChatService then
-	warn("'chatByZone' is enable but not working because chat version is not 'LegacyChatService'. Change this in 'TextChatService' -> 'ChatVersion' -> 'LegacyChatService'")
-	Settings.chatByZone = false
-	chatSystem:Destroy()
+if Settings.chatByZone and game.TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+	chatSystemOld:Destroy()
 elseif Settings.chatByZone and game.TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService then
+	chatSystemNew:Destroy()
 	task.spawn(function()
-		repeat task.wait() until (game:GetService("Chat").ChatModules)
-
-		chatSystem.Parent = game:GetService("Chat").ChatModules
+		repeat task.wait() until (Chat:FindFirstChild("ChatModules"))
+		chatSystemOld.Parent = Chat.ChatModules
 	end)
 else
-	chatSystem:Destroy()
+	chatSystemNew:Destroy()
+	chatSystemOld:Destroy()
 end
 
 --Regions
@@ -39,12 +40,14 @@ local regions = mainFolder.Regions:GetChildren()
 for i = 1, #regions do
 	local region = regions[i]
 	if (region:IsA("Part")) then
+		region.CanTouch = true
 		region.Transparency = 1
 	elseif (region:IsA("Folder")) then
 		local regions2 = region:GetChildren()
 		for i = 1, #regions2 do
 			local region2 = regions2[i]
 			region2.Transparency = 1
+			region2.CanTouch = true
 		end
 	end
 end
