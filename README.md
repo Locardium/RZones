@@ -5,7 +5,7 @@ RZones serve to track and store the player's location in the different predefine
 
 ### Settings
 In Settings file.
-- `chatByZone` _(bool)_: Chat only work by zones (This function only work if chat version is "LegacyChatService". Change this in "TextChatService" -> "ChatVersion" -> "LegacyChatService")
+- `chatByZone` _(bool)_: Chat only work by zones
 
 - `topBarInfo` _(bool)_: Show current zone in the top bar (recomended)
 
